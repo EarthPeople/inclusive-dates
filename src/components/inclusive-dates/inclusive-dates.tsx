@@ -97,6 +97,9 @@ export class InclusiveDates {
   // Prevent hiding the calendar
   @Prop() inline?: boolean = false;
 
+  // Enable or disable week numbers
+  @Prop() weekNumbers?: boolean = false;
+
   // Current error state of the input field
   @Prop({ mutable: true }) hasError?: boolean = false;
   // Text label for next month button
@@ -478,6 +481,10 @@ export class InclusiveDates {
   watchRange(newValue) {
     this.range = newValue;
   }
+  @Watch("weekNumbers")
+  watchWeekNumbers(newValue) {
+    this.weekNumbers = newValue;
+  }
 
   @Watch("minDate")
   watchMinDate(newValue) {
@@ -576,6 +583,7 @@ export class InclusiveDates {
             minDate={this.minDate}
             maxDate={this.maxDate}
             inline={this.inline}
+            weekNumbers={this.weekNumbers}
           />
         </inclusive-dates-modal>
         {this.showQuickButtons &&

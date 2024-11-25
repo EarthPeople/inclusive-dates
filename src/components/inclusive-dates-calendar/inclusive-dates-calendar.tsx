@@ -26,6 +26,7 @@ import {
   getPreviousMonth,
   getPreviousYear,
   getWeekDays,
+  getISOWeek,
   getYear,
   isDateInRange,
   isSameDay,
@@ -98,6 +99,7 @@ export class InclusiveDatesCalendar {
   @Prop() minDate?: string;
   @Prop() maxDate?: string;
   @Prop() inline?: boolean = false;
+  @Prop() weekNumbers?: boolean = false;
   @Prop() showClearButton?: boolean = false;
   @Prop() showMonthStepper?: boolean = true;
   @Prop() showTodayButton?: boolean = true;
@@ -145,6 +147,12 @@ export class InclusiveDatesCalendar {
   watchRange() {
     this.value = undefined;
     this.selectDate.emit(undefined);
+  }
+
+  @Watch("weekNumbers")
+  watchWeekNumbers(newValue) {
+    console.log(newValue);
+    this.weekNumbers = newValue;
   }
 
   @Watch("startDate")
@@ -626,6 +634,17 @@ export class InclusiveDatesCalendar {
             >
               <thead class={this.getClassName("calendar-header")}>
                 <tr class={this.getClassName("weekday-row")}>
+                  {this.weekNumbers ? (
+                    <th
+                      role="columnheader"
+                      class={this.getClassName("week")}
+                      key={"week"}
+                      scope="col"
+                    >
+                      <span aria-hidden="true">#</span>
+                      <span class="visually-hidden">Week</span>
+                    </th>
+                  ) : null}
                   {this.weekdays.map((weekday) => (
                     <th
                       role="columnheader"
@@ -644,9 +663,27 @@ export class InclusiveDatesCalendar {
               <tbody>
                 {this.getCalendarRows().map((calendarRow) => {
                   const rowKey = `row-${calendarRow[0].getMonth()}-${calendarRow[0].getDate()}`;
+                  const weekNumber = this.weekNumbers
+                    ? getISOWeek(calendarRow[0])
+                    : "";
 
                   return (
                     <tr class={this.getClassName("calendar-row")} key={rowKey}>
+                      {this.weekNumbers ? (
+                        <td
+                          aria-label={`Week ${weekNumber}`}
+                          class={{
+                            [this.getClassName("date")]: true,
+                            [this.getClassName("week")]: true
+                          }}
+                          key={`cell-week-${weekNumber}`}
+                          role="gridcell"
+                          tabIndex={-1}
+                        >
+                          <span aria-hidden="true">{weekNumber}</span>
+                          <span class="visually-hidden">Week {weekNumber}</span>
+                        </td>
+                      ) : null}
                       {calendarRow.map((day) => {
                         const isCurrent = isSameDay(day, this.currentDate);
 

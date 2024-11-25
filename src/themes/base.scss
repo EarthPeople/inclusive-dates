@@ -249,6 +249,12 @@ inclusive-dates *:focus-visible {
   background-color: transparent;
 }
 
+.inclusive-dates-calendar__week {
+  span {
+    color: var(--secondary-color);
+  }
+}
+
 .inclusive-dates-calendar__footer {
   padding-right: 0.75rem;
   padding-bottom: 0.75rem;
