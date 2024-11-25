@@ -1,0 +1,14 @@
+:host::part(body) {
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 1200;
+  margin-top: 0.5rem;
+}
+:host::part(backdrop) {
+  /* Placeholder */
+}
+
+:host::part(content) {
+  /* Placeholder */
+}
