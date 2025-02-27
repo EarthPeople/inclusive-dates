@@ -109,6 +109,7 @@ export class InclusiveDatesCalendar {
   @Prop() startDate?: string = getISODateString(new Date());
   @Prop() todayButtonContent?: string;
   @Prop({ mutable: true }) value?: Date | Date[];
+  @Prop() weekNumbersSymbol?: string = "#";
 
   @State() currentDate: Date;
   @State() hoveredDate: Date;
@@ -641,7 +642,7 @@ export class InclusiveDatesCalendar {
                       key={"week"}
                       scope="col"
                     >
-                      <span aria-hidden="true">#</span>
+                      <span aria-hidden="true">{this.weekNumbersSymbol}</span>
                       <span class="visually-hidden">Week</span>
                     </th>
                   ) : null}
@@ -757,7 +758,11 @@ export class InclusiveDatesCalendar {
                             isOverflowing,
                           [this.getClassName("date--today")]: isToday,
                           [this.getClassName("date--selected")]: isSelected,
-                          [this.getClassName("date--in-range")]: isInRange
+                          [this.getClassName("date--in-range")]: isInRange,
+                          [this.getClassName("date--before-min")]:
+                            !dateIsWithinLowerBounds(day, this.minDate),
+                          [this.getClassName("date--after-max")]:
+                            !dateIsWithinUpperBounds(day, this.maxDate)
                         };
 
                         const Tag = isSelected
