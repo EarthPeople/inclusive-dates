@@ -134,6 +134,8 @@ export class InclusiveDates {
   @Prop() todayButtonContent?: string;
   // Show or hide the quick buttons
   @Prop() showQuickButtons?: boolean = true;
+  // Add this with the other @Prop() declarations
+  @Prop() weekNumbersSymbol?: string = "#";
 
   @State() internalValue: string | string[];
   @State() errorState: boolean = this.hasError;
@@ -584,6 +586,7 @@ export class InclusiveDates {
             maxDate={this.maxDate}
             inline={this.inline}
             weekNumbers={this.weekNumbers}
+            weekNumbersSymbol={this.weekNumbersSymbol}
           />
         </inclusive-dates-modal>
         {this.showQuickButtons &&
