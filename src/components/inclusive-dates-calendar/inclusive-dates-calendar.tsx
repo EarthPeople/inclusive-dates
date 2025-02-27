@@ -757,7 +757,11 @@ export class InclusiveDatesCalendar {
                             isOverflowing,
                           [this.getClassName("date--today")]: isToday,
                           [this.getClassName("date--selected")]: isSelected,
-                          [this.getClassName("date--in-range")]: isInRange
+                          [this.getClassName("date--in-range")]: isInRange,
+                          [this.getClassName("date--before-min")]:
+                            !dateIsWithinLowerBounds(day, this.minDate),
+                          [this.getClassName("date--after-max")]:
+                            !dateIsWithinUpperBounds(day, this.maxDate)
                         };
 
                         const Tag = isSelected
