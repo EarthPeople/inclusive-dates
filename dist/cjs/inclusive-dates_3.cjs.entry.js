@@ -10027,6 +10027,7 @@ const InclusiveDatesCalendar = class {
     this.showKeyboardHint = false;
     this.showHiddenTitle = true;
     this.startDate = getISODateString(new Date());
+    this.weekNumbersSymbol = "#";
     this.init = () => {
       this.currentDate = this.startDate
         ? removeTimezoneOffset(new Date(this.startDate))
@@ -10297,7 +10298,7 @@ const InclusiveDatesCalendar = class {
     })), index$1.h("input", { "aria-label": this.labels.yearSelect, class: this.getClassName("year-select"), "aria-disabled": this.disabled, max: this.maxDate ? this.maxDate.slice(0, 4) : 9999, min: this.minDate ? this.minDate.slice(0, 4) : 1, name: "year", onChange: this.onYearSelect, type: "number", value: this.currentDate.getFullYear() })), this.showMonthStepper && (index$1.h("button", { "aria-label": this.labels.nextMonthButton, class: this.getClassName("next-month-button"), "aria-disabled": this.disabled ||
         monthIsDisabled(getNextMonth(this.currentDate).getMonth(), getNextMonth(this.currentDate).getFullYear(), this.minDate, this.maxDate), innerHTML: this.nextMonthButtonContent || undefined, onClick: this.nextMonth, type: "button" }, index$1.h("svg", { fill: "none", height: "24", "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", stroke: "currentColor", viewBox: "0 0 24 24", width: "24" }, index$1.h("polyline", { points: "9 18 15 12 9 6" })))), this.showYearStepper && (index$1.h("button", { "aria-label": this.labels.nextYearButton, class: this.getClassName("next-year-button"), "aria-disabled": this.disabled ||
         new Date(this.maxDate).getFullYear() <
-          getNextYear(this.currentDate).getFullYear(), innerHTML: this.nextYearButtonContent || undefined, onClick: this.nextYear, type: "button" }, index$1.h("svg", { fill: "none", height: "24", "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", stroke: "currentColor", viewBox: "0 0 24 24", width: "24" }, index$1.h("polyline", { points: "13 17 18 12 13 7" }), index$1.h("polyline", { points: "6 17 11 12 6 7" }))))), index$1.h("div", { class: this.getClassName("body") }, index$1.h("table", { class: this.getClassName("calendar"), onKeyDown: this.onKeyDown, role: "grid", "aria-label": this.getTitle() }, index$1.h("thead", { class: this.getClassName("calendar-header") }, index$1.h("tr", { class: this.getClassName("weekday-row") }, this.weekNumbers ? (index$1.h("th", { role: "columnheader", class: this.getClassName("week"), key: "week", scope: "col" }, index$1.h("span", { "aria-hidden": "true" }, "#"), index$1.h("span", { class: "visually-hidden" }, "Week"))) : null, this.weekdays.map((weekday) => (index$1.h("th", { role: "columnheader", abbr: weekday[1], class: this.getClassName("weekday"), key: weekday[0], scope: "col" }, index$1.h("span", { "aria-hidden": "true" }, weekday[0]), index$1.h("span", { class: "visually-hidden" }, weekday[1])))))), index$1.h("tbody", null, this.getCalendarRows().map((calendarRow) => {
+          getNextYear(this.currentDate).getFullYear(), innerHTML: this.nextYearButtonContent || undefined, onClick: this.nextYear, type: "button" }, index$1.h("svg", { fill: "none", height: "24", "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", stroke: "currentColor", viewBox: "0 0 24 24", width: "24" }, index$1.h("polyline", { points: "13 17 18 12 13 7" }), index$1.h("polyline", { points: "6 17 11 12 6 7" }))))), index$1.h("div", { class: this.getClassName("body") }, index$1.h("table", { class: this.getClassName("calendar"), onKeyDown: this.onKeyDown, role: "grid", "aria-label": this.getTitle() }, index$1.h("thead", { class: this.getClassName("calendar-header") }, index$1.h("tr", { class: this.getClassName("weekday-row") }, this.weekNumbers ? (index$1.h("th", { role: "columnheader", class: this.getClassName("week"), key: "week", scope: "col" }, index$1.h("span", { "aria-hidden": "true" }, this.weekNumbersSymbol), index$1.h("span", { class: "visually-hidden" }, "Week"))) : null, this.weekdays.map((weekday) => (index$1.h("th", { role: "columnheader", abbr: weekday[1], class: this.getClassName("weekday"), key: weekday[0], scope: "col" }, index$1.h("span", { "aria-hidden": "true" }, weekday[0]), index$1.h("span", { class: "visually-hidden" }, weekday[1])))))), index$1.h("tbody", null, this.getCalendarRows().map((calendarRow) => {
       const rowKey = `row-${calendarRow[0].getMonth()}-${calendarRow[0].getDate()}`;
       const weekNumber = this.weekNumbers
         ? getISOWeek(calendarRow[0])
@@ -10358,7 +10359,9 @@ const InclusiveDatesCalendar = class {
           [this.getClassName("date--overflowing")]: isOverflowing,
           [this.getClassName("date--today")]: isToday,
           [this.getClassName("date--selected")]: isSelected,
-          [this.getClassName("date--in-range")]: isInRange
+          [this.getClassName("date--in-range")]: isInRange,
+          [this.getClassName("date--before-min")]: !dateIsWithinLowerBounds(day, this.minDate),
+          [this.getClassName("date--after-max")]: !dateIsWithinUpperBounds(day, this.maxDate)
         };
         const Tag = isSelected
           ? "strong"

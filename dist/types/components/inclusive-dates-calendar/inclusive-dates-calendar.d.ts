@@ -46,6 +46,7 @@ export declare class InclusiveDatesCalendar {
   startDate?: string;
   todayButtonContent?: string;
   value?: Date | Date[];
+  weekNumbersSymbol?: string;
   currentDate: Date;
   hoveredDate: Date;
   weekdays: string[][];

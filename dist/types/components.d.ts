@@ -71,6 +71,7 @@ export namespace Components {
         "todayButtonContent"?: string;
         "value"?: Date | Date[];
         "weekNumbers"?: boolean;
+        "weekNumbersSymbol"?: string;
     }
     interface InclusiveDatesModal {
         /**
@@ -189,6 +190,7 @@ declare namespace LocalJSX {
         "todayButtonContent"?: string;
         "value"?: Date | Date[];
         "weekNumbers"?: boolean;
+        "weekNumbersSymbol"?: string;
     }
     interface InclusiveDatesModal {
         "inline"?: boolean;
