@@ -43,6 +43,7 @@ export namespace Components {
         "useStrictDateParsing"?: boolean;
         "value"?: string | string[];
         "weekNumbers"?: boolean;
+        "weekNumbersSymbol"?: string;
     }
     interface InclusiveDatesCalendar {
         "clearButtonContent"?: string;
@@ -160,6 +161,7 @@ declare namespace LocalJSX {
         "useStrictDateParsing"?: boolean;
         "value"?: string | string[];
         "weekNumbers"?: boolean;
+        "weekNumbersSymbol"?: string;
     }
     interface InclusiveDatesCalendar {
         "clearButtonContent"?: string;

@@ -9462,6 +9462,8 @@ const InclusiveDates$1 = /*@__PURE__*/ proxyCustomElement(class extends HTMLElem
       : ["Yesterday", "Today", "Tomorrow", "In 10 days"];
     // Show or hide the quick buttons
     this.showQuickButtons = true;
+    // Add this with the other @Prop() declarations
+    this.weekNumbersSymbol = "#";
     this.errorState = this.hasError;
     this.disabledState = this.disabled;
     this.chronoSupportedLocale = ["en", "ja", "fr", "nl", "ru", "pt"].includes(this.locale.slice(0, 2));
@@ -9772,7 +9774,7 @@ const InclusiveDates$1 = /*@__PURE__*/ proxyCustomElement(class extends HTMLElem
         this.pickerRef.modalIsOpen = false;
       }, inline: this.inline }, h("inclusive-dates-calendar", { range: this.range, locale: this.locale, onSelectDate: (event) => this.handlePickerSelection(event.detail), onChangeMonth: (event) => this.handleChangedMonths(event.detail), labels: this.inclusiveDatesCalendarLabels
         ? this.inclusiveDatesCalendarLabels
-        : undefined, ref: (el) => (this.pickerRef = el), startDate: this.startDate, firstDayOfWeek: this.firstDayOfWeek, showHiddenTitle: true, disabled: this.disabledState, showMonthStepper: this.showMonthStepper, showYearStepper: this.showYearStepper, showClearButton: this.showClearButton, showKeyboardHint: this.showKeyboardHint, disableDate: this.disableDate, minDate: this.minDate, maxDate: this.maxDate, inline: this.inline, weekNumbers: this.weekNumbers })), this.showQuickButtons &&
+        : undefined, ref: (el) => (this.pickerRef = el), startDate: this.startDate, firstDayOfWeek: this.firstDayOfWeek, showHiddenTitle: true, disabled: this.disabledState, showMonthStepper: this.showMonthStepper, showYearStepper: this.showYearStepper, showClearButton: this.showClearButton, showKeyboardHint: this.showKeyboardHint, disableDate: this.disableDate, minDate: this.minDate, maxDate: this.maxDate, inline: this.inline, weekNumbers: this.weekNumbers, weekNumbersSymbol: this.weekNumbersSymbol })), this.showQuickButtons &&
       ((_a = this.quickButtons) === null || _a === void 0 ? void 0 : _a.length) > 0 &&
       this.chronoSupportedLocale && (h("div", { class: this.getClassName("quick-group"), role: "group", "aria-label": "Quick selection" }, this.quickButtons.map((buttonText) => {
       return (h("button", { class: this.getClassName("quick-button"), onClick: this.handleQuickButtonClick, disabled: this.disabledState, type: "button" }, buttonText));
@@ -9823,6 +9825,7 @@ const InclusiveDates$1 = /*@__PURE__*/ proxyCustomElement(class extends HTMLElem
     "quickButtons": [16],
     "todayButtonContent": [1, "today-button-content"],
     "showQuickButtons": [4, "show-quick-buttons"],
+    "weekNumbersSymbol": [1, "week-numbers-symbol"],
     "internalValue": [32],
     "errorState": [32],
     "disabledState": [32],

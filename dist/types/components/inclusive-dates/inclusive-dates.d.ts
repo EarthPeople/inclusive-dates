@@ -47,6 +47,7 @@ export declare class InclusiveDates {
   quickButtons?: string[];
   todayButtonContent?: string;
   showQuickButtons?: boolean;
+  weekNumbersSymbol?: string;
   internalValue: string | string[];
   errorState: boolean;
   disabledState: boolean;
