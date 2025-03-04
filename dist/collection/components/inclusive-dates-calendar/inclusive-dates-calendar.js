@@ -93,51 +93,57 @@ export class InclusiveDatesCalendar {
       if (this.disabled) {
         return;
       }
+      // Get currently focused date cell
+      const focusedCell = this.el.querySelector(".inclusive-dates-calendar__date:focus");
+      // If no cell is focused, use currentDate
+      const currentFocusDate = focusedCell
+        ? new Date(focusedCell.dataset.date)
+        : this.currentDate;
       if (event.code === "ArrowLeft") {
         event.preventDefault();
-        this.updateCurrentDate(getPreviousDay(this.currentDate), true);
+        this.updateCurrentDate(getPreviousDay(currentFocusDate), true);
       }
       else if (event.code === "ArrowRight") {
         event.preventDefault();
-        this.updateCurrentDate(getNextDay(this.currentDate), true);
+        this.updateCurrentDate(getNextDay(currentFocusDate), true);
       }
       else if (event.code === "ArrowUp") {
         event.preventDefault();
-        this.updateCurrentDate(subDays(this.currentDate, 7), true);
+        this.updateCurrentDate(subDays(currentFocusDate, 7), true);
       }
       else if (event.code === "ArrowDown") {
         event.preventDefault();
-        this.updateCurrentDate(addDays(this.currentDate, 7), true);
+        this.updateCurrentDate(addDays(currentFocusDate, 7), true);
       }
       else if (event.code === "PageUp") {
         event.preventDefault();
         if (event.shiftKey) {
-          this.updateCurrentDate(getPreviousYear(this.currentDate), true);
+          this.updateCurrentDate(getPreviousYear(currentFocusDate), true);
         }
         else {
-          this.updateCurrentDate(getPreviousMonth(this.currentDate), true);
+          this.updateCurrentDate(getPreviousMonth(currentFocusDate), true);
         }
       }
       else if (event.code === "PageDown") {
         event.preventDefault();
         if (event.shiftKey) {
-          this.updateCurrentDate(getNextYear(this.currentDate), true);
+          this.updateCurrentDate(getNextYear(currentFocusDate), true);
         }
         else {
-          this.updateCurrentDate(getNextMonth(this.currentDate), true);
+          this.updateCurrentDate(getNextMonth(currentFocusDate), true);
         }
       }
       else if (event.code === "Home") {
         event.preventDefault();
-        this.updateCurrentDate(getFirstOfMonth(this.currentDate), true);
+        this.updateCurrentDate(getFirstOfMonth(currentFocusDate), true);
       }
       else if (event.code === "End") {
         event.preventDefault();
-        this.updateCurrentDate(getLastOfMonth(this.currentDate), true);
+        this.updateCurrentDate(getLastOfMonth(currentFocusDate), true);
       }
       else if (event.code === "Space" || event.code === "Enter") {
         event.preventDefault();
-        this.onSelectDate(this.currentDate);
+        this.onSelectDate(currentFocusDate);
       }
     };
     this.onMouseEnter = (event) => {
