@@ -205,6 +205,11 @@ export class InclusiveDatesCalendar {
     this.maxDate = newValue;
     this.updateCurrentDate(this.currentDate);
   }
+  watchDisableDate() {
+    if (this.modalIsOpen) {
+      this.focusDate(this.currentDate);
+    }
+  }
   componentDidRender() {
     if (this.moveFocusAfterMonthChanged) {
       this.focusDate(this.currentDate);
@@ -963,6 +968,9 @@ export class InclusiveDatesCalendar {
       }, {
         "propName": "maxDate",
         "methodName": "watchMaxDate"
+      }, {
+        "propName": "disableDate",
+        "methodName": "watchDisableDate"
       }];
   }
 }

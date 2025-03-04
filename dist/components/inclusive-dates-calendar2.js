@@ -404,6 +404,11 @@ const InclusiveDatesCalendar = /*@__PURE__*/ proxyCustomElement(class extends HT
     this.maxDate = newValue;
     this.updateCurrentDate(this.currentDate);
   }
+  watchDisableDate() {
+    if (this.modalIsOpen) {
+      this.focusDate(this.currentDate);
+    }
+  }
   componentDidRender() {
     if (this.moveFocusAfterMonthChanged) {
       this.focusDate(this.currentDate);
@@ -600,7 +605,8 @@ const InclusiveDatesCalendar = /*@__PURE__*/ proxyCustomElement(class extends HT
     "startDate": ["watchStartDate"],
     "value": ["watchValue"],
     "minDate": ["watchMinDate"],
-    "maxDate": ["watchMaxDate"]
+    "maxDate": ["watchMaxDate"],
+    "disableDate": ["watchDisableDate"]
   }; }
   static get style() { return inclusiveDatesCalendarCss; }
 }, [2, "inclusive-dates-calendar", {

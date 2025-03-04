@@ -64,6 +64,7 @@ export declare class InclusiveDatesCalendar {
   watchValue(): void;
   watchMinDate(newValue: any): void;
   watchMaxDate(newValue: any): void;
+  watchDisableDate(): void;
   componentDidRender(): void;
   private init;
   private updateWeekdays;
