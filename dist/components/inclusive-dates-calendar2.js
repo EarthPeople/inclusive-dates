@@ -392,11 +392,9 @@ const InclusiveDatesCalendar = /*@__PURE__*/ proxyCustomElement(class extends HT
   }
   watchMinDate(newValue) {
     this.minDate = newValue;
-    // this.updateCurrentDate(this.currentDate);
   }
   watchMaxDate(newValue) {
     this.maxDate = newValue;
-    // this.updateCurrentDate(this.currentDate);
   }
   componentDidRender() {
     if (this.moveFocusAfterMonthChanged) {
