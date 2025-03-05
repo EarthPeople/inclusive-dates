@@ -176,13 +176,13 @@ export class InclusiveDatesCalendar {
   @Watch("minDate")
   watchMinDate(newValue) {
     this.minDate = newValue;
-    this.updateCurrentDate(this.currentDate);
+    // this.updateCurrentDate(this.currentDate);
   }
 
   @Watch("maxDate")
   watchMaxDate(newValue) {
     this.maxDate = newValue;
-    this.updateCurrentDate(this.currentDate);
+    // this.updateCurrentDate(this.currentDate);
   }
 
   componentDidRender() {

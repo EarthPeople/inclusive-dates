@@ -193,11 +193,11 @@ export class InclusiveDatesCalendar {
   }
   watchMinDate(newValue) {
     this.minDate = newValue;
-    this.updateCurrentDate(this.currentDate);
+    // this.updateCurrentDate(this.currentDate);
   }
   watchMaxDate(newValue) {
     this.maxDate = newValue;
-    this.updateCurrentDate(this.currentDate);
+    // this.updateCurrentDate(this.currentDate);
   }
   componentDidRender() {
     if (this.moveFocusAfterMonthChanged) {
