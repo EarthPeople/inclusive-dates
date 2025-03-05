@@ -10199,11 +10199,6 @@ const InclusiveDatesCalendar = class {
     this.maxDate = newValue;
     this.updateCurrentDate(this.currentDate);
   }
-  watchDisableDate() {
-    if (this.modalIsOpen) {
-      this.focusDate(this.currentDate);
-    }
-  }
   componentDidRender() {
     if (this.moveFocusAfterMonthChanged) {
       this.focusDate(this.currentDate);
@@ -10400,8 +10395,7 @@ const InclusiveDatesCalendar = class {
     "startDate": ["watchStartDate"],
     "value": ["watchValue"],
     "minDate": ["watchMinDate"],
-    "maxDate": ["watchMaxDate"],
-    "disableDate": ["watchDisableDate"]
+    "maxDate": ["watchMaxDate"]
   }; }
 };
 InclusiveDatesCalendar.style = inclusiveDatesCalendarCss;
