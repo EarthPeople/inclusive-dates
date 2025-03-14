@@ -1,0 +1,14 @@
+{
+  "entries": [
+    "./components/inclusive-dates-calendar/inclusive-dates-calendar.js",
+    "./components/inclusive-dates/inclusive-dates.js",
+    "./components/inclusive-dates-modal/inclusive-dates-modal.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "2.18.1",
+    "typescriptVersion": "4.7.4"
+  },
+  "collections": [],
+  "bundles": []
+}
