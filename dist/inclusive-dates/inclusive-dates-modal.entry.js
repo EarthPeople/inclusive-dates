@@ -1,4 +1,4 @@
-import { proxyCustomElement, HTMLElement as HTMLElement$1, createEvent, h, Host } from '@stencil/core/internal/client';
+import { r as registerInstance, e as createEvent, h, f as Host } from './index-c8b02c7f.js';
 
 /**
  * Traverses the slots of the open shadowroots and returns all children matching the query.
@@ -415,14 +415,44 @@ var hideOthers = function (originalTarget, parentNode, markerName) {
     targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll('[aria-live]')));
     return applyAttributeToOthers(targets, activeParentNode, markerName, 'aria-hidden');
 };
+/**
+ * Marks everything except given node(or nodes) as inert
+ * @param {Element | Element[]} originalTarget - elements to keep on the page
+ * @param [parentNode] - top element, defaults to document.body
+ * @param {String} [markerName] - a special attribute to mark every node
+ * @return {Undo} undo command
+ */
+var inertOthers = function (originalTarget, parentNode, markerName) {
+    if (markerName === void 0) { markerName = 'data-inert-ed'; }
+    var activeParentNode = parentNode || getDefaultParent(originalTarget);
+    if (!activeParentNode) {
+        return function () { return null; };
+    }
+    return applyAttributeToOthers(originalTarget, activeParentNode, markerName, 'inert');
+};
+/**
+ * @returns if current browser supports inert
+ */
+var supportsInert = function () {
+    return typeof HTMLElement !== 'undefined' && HTMLElement.prototype.hasOwnProperty('inert');
+};
+/**
+ * Automatic function to "suppress" DOM elements - _hide_ or _inert_ in the best possible way
+ * @param {Element | Element[]} originalTarget - elements to keep on the page
+ * @param [parentNode] - top element, defaults to document.body
+ * @param {String} [markerName] - a special attribute to mark every node
+ * @return {Undo} undo command
+ */
+var suppressOthers = function (originalTarget, parentNode, markerName) {
+    if (markerName === void 0) { markerName = 'data-suppressed'; }
+    return (supportsInert() ? inertOthers : hideOthers)(originalTarget, parentNode, markerName);
+};
 
 const inclusiveDatesModalCss = ":host::part(body){position:absolute;width:-moz-fit-content;width:fit-content;z-index:1200;margin-top:0.5rem}:host::part(backdrop){}:host::part(content){}";
 
-const InclusiveDatesModal = /*@__PURE__*/ proxyCustomElement(class extends HTMLElement$1 {
-  constructor() {
-    super();
-    this.__registerHost();
-    this.__attachShadow();
+const InclusiveDatesModal = class {
+  constructor(hostRef) {
+    registerInstance(this, hostRef);
     this.opened = createEvent(this, "opened", 7);
     this.closed = createEvent(this, "closed", 7);
     this.inline = false;
@@ -472,29 +502,7 @@ const InclusiveDatesModal = /*@__PURE__*/ proxyCustomElement(class extends HTMLE
         this.el = r;
       } }, !this.inline && this.showing && (h("div", { part: "body", onKeyDown: this.onKeyDown, role: "dialog", tabindex: -1, "aria-hidden": !this.showing, "aria-label": this.label, "aria-modal": this.showing }, h("focus-trap", null, h("div", { part: "content" }, h("slot", null))))), this.inline && (h("div", { part: "content" }, h("slot", null)))));
   }
-  static get style() { return inclusiveDatesModalCss; }
-}, [1, "inclusive-dates-modal", {
-    "label": [1],
-    "inline": [4],
-    "closing": [32],
-    "showing": [32],
-    "open": [64],
-    "close": [64],
-    "getState": [64],
-    "setTriggerElement": [64]
-  }, [[10, "click", "handleClick"]]]);
-function defineCustomElement() {
-  if (typeof customElements === "undefined") {
-    return;
-  }
-  const components = ["inclusive-dates-modal"];
-  components.forEach(tagName => { switch (tagName) {
-    case "inclusive-dates-modal":
-      if (!customElements.get(tagName)) {
-        customElements.define(tagName, InclusiveDatesModal);
-      }
-      break;
-  } });
-}
+};
+InclusiveDatesModal.style = inclusiveDatesModalCss;
 
-export { InclusiveDatesModal as I, defineCustomElement as d };
+export { InclusiveDatesModal as inclusive_dates_modal };
