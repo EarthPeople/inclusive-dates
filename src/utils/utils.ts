@@ -120,9 +120,20 @@ export function getNextDay(date: Date): Date {
 }
 
 export function getNextMonth(date: Date): Date {
+  const day = date.getDate();
   const newDate = new Date(date);
 
+  // Set to 1st of current month
+  newDate.setDate(1);
+  // Move to next month
   newDate.setMonth(newDate.getMonth() + 1);
+  // Try to restore original day (will cap at max days in month)
+  const lastDayOfNewMonth = new Date(
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    0
+  ).getDate();
+  newDate.setDate(Math.min(day, lastDayOfNewMonth));
 
   return newDate;
 }
@@ -140,9 +151,21 @@ export function getPreviousDay(date: Date): Date {
 }
 
 export function getPreviousMonth(date: Date): Date {
+  const day = date.getDate();
   const newDate = new Date(date);
 
+  // Set to 1st of current month
+  newDate.setDate(1);
+  // Move to previous month
   newDate.setMonth(newDate.getMonth() - 1);
+  // Try to restore original day (will cap at max days in month)
+  const lastDayOfNewMonth = new Date(
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    0
+  ).getDate();
+  newDate.setDate(Math.min(day, lastDayOfNewMonth));
+
   return newDate;
 }
 
