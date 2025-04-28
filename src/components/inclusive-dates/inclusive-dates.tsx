@@ -261,12 +261,14 @@ export class InclusiveDates {
   };
 
   private handleChangedMonths = (newMonth: MonthChangedEventDetails) => {
+    const formattedMonth = String(newMonth.month).padStart(2, "0");
+
     announce(
       `${Intl.DateTimeFormat(this.locale, {
         month: "long",
         year: "numeric"
       }).format(
-        removeTimezoneOffset(new Date(`${newMonth.year}-${newMonth.month}`))
+        removeTimezoneOffset(new Date(`${newMonth.year}-${formattedMonth}-01`))
       )}`,
       "assertive"
     );

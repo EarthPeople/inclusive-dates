@@ -9507,10 +9507,11 @@ const InclusiveDates$1 = /*@__PURE__*/ proxyCustomElement(class extends HTMLElem
       }
     };
     this.handleChangedMonths = (newMonth) => {
+      const formattedMonth = String(newMonth.month).padStart(2, "0");
       $319e236875307eab$export$a9b970dcc4ae71a9(`${Intl.DateTimeFormat(this.locale, {
         month: "long",
         year: "numeric"
-      }).format(removeTimezoneOffset(new Date(`${newMonth.year}-${newMonth.month}`)))}`, "assertive");
+      }).format(removeTimezoneOffset(new Date(`${newMonth.year}-${formattedMonth}-01`)))}`, "assertive");
     };
     this.handleChange = async (event) => {
       if (this.range) {
